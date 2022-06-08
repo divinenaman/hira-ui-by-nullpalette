@@ -11,17 +11,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           always-auth: true
-          node-version: "14.x"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@TheNullPalette"    
-      - run: ls -a
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@TheNullPalette'    
       - run: npm install
       - run: npm run build
+      - run: npm version patch
+      - run: npm publish
       - run: |
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
-          npm version patch
-      - run: npm publish
+          git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_NAMAN }}
-      - run: git push
