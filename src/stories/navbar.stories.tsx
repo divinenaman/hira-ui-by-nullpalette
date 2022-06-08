@@ -21,6 +21,8 @@ Primary.args = {
   height: 300,
   brandingSection: "Branding",
   style: { backgroundColor: "black", color: "white" },
-  hamburgerPosition: "left",
+  menuPosition: "left",
+  menuColor: "white",
+  menuSize: 24,
   showHelperBoundaries: true,
 };
