@@ -1,7 +1,7 @@
 {
   "name": "hira-ui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/hira-ui.es.js",
   "module": "dist/hira-ui.es.js",
   "types": "dist/index.d.ts",
