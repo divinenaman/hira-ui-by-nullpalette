@@ -8,7 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm version patch
+      - run: |
+          git config user.name nullpalette-dev
+          git config user.email nullpalette@github.com
+          npm version patch
       - uses: actions/setup-node@v3
         with:
           always-auth: true
@@ -16,9 +19,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm run build
-      - run: |
-          git config user.name nullpalette-dev
-          git config user.email nullpalette@github.com
       - run: npm publish
       - run: git push
         env:
