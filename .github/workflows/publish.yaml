@@ -15,6 +15,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm run build
+      - run: |
+          git config user.name nullpalette-dev
+          git config user.email nullpalette@github.com
+          npm version patch
       - run: npm publish
+      - run: git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
