@@ -8,12 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: |
+          git config user.name nullpalette-dev
+          git config user.email nullpalette@github.com
+          npm version patch
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://registry.npmjs.org/'
       - run: npm install
       - run: npm run build
+      - run: npm login
       - run: npm publish --access public
+      - run: git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
