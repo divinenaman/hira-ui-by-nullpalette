@@ -1,0 +1,77 @@
+@use "../../../scss/responsive" as *;
+
+.hira-footer {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  grid-auto-flow: row;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 30px;
+
+  @mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @mixin textHeading {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  @mixin textNormal {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  @include textNormal();
+
+  &_branding {
+    grid-column: 1/2;
+    @include flexCenter();
+    flex-direction: column;
+
+    @include mobileMediaQuery {
+      grid-column: 1/3;
+    }
+  }
+
+  &_link {
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-flow: row;
+    gap: 10px;
+
+    @include mobileMediaQuery {
+      grid-column: 1/3;
+    }
+
+    &_column {
+      @include flexCenter();
+      flex-direction: column;
+      gap: 20px;
+
+      &_title {
+        @include textHeading();
+      }
+
+      &_link {
+        @include flexCenter();
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
+
+  &_copyright {
+    grid-column: 1/3;
+    @include flexCenter();
+  }
+
+  &[data-help=true] {
+      &, & > * {
+          border: solid 2px red;
+      }
+  }
+}
