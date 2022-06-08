@@ -1,6 +1,5 @@
 {
   "name": "hira-ui",
-  "private": true,
   "version": "0.0.0",
   "main": "dist/hira-ui.es.js",
   "module": "dist/hira-ui.es.js",
