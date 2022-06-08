@@ -16,11 +16,11 @@ jobs:
           scope: '@TheNullPalette'    
       - run: npm install
       - run: npm run build
-      - run: npm version patch
-      - run: npm publish
       - run: |
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
-          git push
+      - run: npm version patch
+      - run: npm publish
+      - run: git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_NAMAN }}
