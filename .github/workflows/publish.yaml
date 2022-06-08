@@ -13,8 +13,8 @@ jobs:
           always-auth: true
           node-version: "14.x"
           registry-url: "https://npm.pkg.github.com"
-          scope: "@TheNullPalette"
-      - run: npm login    
+          scope: "@TheNullPalette"    
+      - run: ls -a
       - run: npm install
       - run: npm run build
       - run: |
