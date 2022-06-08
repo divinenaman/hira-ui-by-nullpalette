@@ -1,6 +1,10 @@
 {
   "name": "hira-ui",
   "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheNullPalette/hira-ui-by-nullpalette.git"
+  },
   "main": "dist/hira-ui.es.js",
   "module": "dist/hira-ui.es.js",
   "types": "dist/index.d.ts",
