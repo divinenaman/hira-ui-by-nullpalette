@@ -14,7 +14,7 @@ jobs:
           always-auth: true
           registry-url: "https://npm.pkg.github.com"
           scope: "@TheNullPalette"
-      - run: npm ci
+      - run: npm install
       - run: npm run build
       - run: |
           git config user.name nullpalette-dev
