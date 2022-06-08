@@ -14,12 +14,13 @@ jobs:
           always-auth: true
           registry-url: "https://npm.pkg.github.com"
           scope: "@TheNullPalette"
-      - run: yarn
-      - run: yarn build
+      - run: npm ci
+      - run: npm run build
       - run: |
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
           npm version patch
+      - run: cat ./.npmrc
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_NAMAN }}
