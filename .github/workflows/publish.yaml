@@ -1,8 +1,5 @@
 name: Publish Package
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -15,16 +12,14 @@ jobs:
         with:
           node-version: "14.x"
           registry-url: "https://npm.pkg.github.com"
-          scope: "TheNullPalette"
-      - run: |
-          npm install --global yarn
-          yarn install
+          scope: "@TheNullPalette"
+      - run: yarn
       - run: yarn build
       - run: |
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
           npm version patch
-          git push
-      - run: npm publish
+      - run: yarn publish
+      - run: git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_NAMAN }}
