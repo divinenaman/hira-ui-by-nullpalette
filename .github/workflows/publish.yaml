@@ -19,7 +19,7 @@ jobs:
       - run: |
           npm install --global yarn
           yarn install
-      - run: yarn dist
+      - run: yarn build
       - run: |
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
