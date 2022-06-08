@@ -5,7 +5,7 @@ import { Link } from "../components";
 
 export default {
   title: "Example/Link",
-  component: Link
+  component: Link,
 } as ComponentMeta<typeof Link>;
 
 const Template: ComponentStory<typeof Link> = (args) => (
@@ -16,5 +16,12 @@ export const Primary = Template.bind({});
 Primary.args = {
   to: "#",
   children: "Click Me!",
-  targetNewTab: false
+  active: false,
+  textColor: "black",
+  onHoverTextColor: "black",
+  onActiveTextColor: "black",
+  backgroundColor: "transparent",
+  onHoverBackgroundColor: "transparent",
+  onActiveBackgroundColor: "transparent",
+  targetNewTab: false,
 };

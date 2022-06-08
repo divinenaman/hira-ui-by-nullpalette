@@ -5,4 +5,6 @@ import Link from "./atoms/Link";
 import { Footer, FooterLinkColumn } from "./molecules/Footer";
 import { NavBar } from "./molecules/NavBar";
 
-export { Text, Link, Button, Footer, FooterLinkColumn, NavBar };
+import { HamburgerIcon } from "./icons/hamburgerIcon";
+
+export { Text, Link, Button, Footer, FooterLinkColumn, NavBar, HamburgerIcon };

@@ -2,14 +2,18 @@ import React, { useState } from "react";
 
 import { IDefaultProps } from "../../../types/Props";
 
+import { HamburgerIcon } from "../../";
+
 import "./index.scss";
 
 interface INavBarProps extends IDefaultProps {
   height?: string | number;
   width?: string | number;
   numOfLinkColumns?: number;
-  brandingSection: string | React.ReactNode;
-  hamburgerPosition: "left" | "right";
+  brandingSection?: string | React.ReactNode;
+  menuPosition?: "left" | "right";
+  menuSize?: number | string;
+  menuColor?: string;
   children: React.ReactNode;
   showHelperBoundaries?: boolean;
 }
@@ -18,7 +22,9 @@ export function NavBar({
   width = "100%",
   height = 200,
   brandingSection = "",
-  hamburgerPosition = "left",
+  menuPosition = "left",
+  menuSize = 24,
+  menuColor = "grey",
   style = {},
   children,
   className = "",
@@ -29,16 +35,24 @@ export function NavBar({
   return (
     <div
       className={`hira-navbar ${className}`}
-      style={{ width, height, ...style }}
+      style={{ width, ...style }}
       data-help={showHelperBoundaries}
     >
-      <div className="hira-navbar_branding" data-ham={hamburgerPosition}>
+      <div
+        className="hira-navbar_branding"
+        style={{ height }}
+        data-menu={menuPosition}
+      >
         <div
-          className="hira-navbar_hamburger"
+          className="hira-navbar_menu"
           onClick={() => setActive(!active)}
           tabIndex={1}
         >
-          click
+          <HamburgerIcon
+            size={menuSize}
+            color={menuColor}
+            style={{ padding: 10 }}
+          />
         </div>
         {brandingSection}
       </div>
