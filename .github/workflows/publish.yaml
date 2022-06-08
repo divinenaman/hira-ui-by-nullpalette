@@ -20,7 +20,8 @@ jobs:
           git config user.name nullpalette-dev
           git config user.email nullpalette@github.com
           npm version patch
-      - run: yarn publish
-      - run: git push
+      - run: |
+          yarn publish
+          git push
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_NAMAN }}
