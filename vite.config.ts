@@ -1,15 +1,20 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    rollupOptions: {
-      input: "lib/index.js",
-      output: {
-        dir: "dist",
-      },
+    lib: {
+      entry: "./src/index.tsx",
+      formats: ["es", "cjs"],
+      fileName: (format) => `hira-ui.${format}.js`,
     },
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
 });
