@@ -5,7 +5,7 @@ interface IButtonProps {
   children: React.ReactNode;
 }
 
-export default function Button({
+export function Button({
   backgroundColor = "black",
   children,
 }: IButtonProps) {
