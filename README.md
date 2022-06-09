@@ -13,12 +13,12 @@ Aesthetic, Easy, Efficient
     Add this import line in the application entry file like index, app to import CSS globally.
 
     ```
-    import "hira-ui/dist/style.css";
+    import "@nullpalette/hira-ui/dist/style.css";
     ```
 
 # Usage   
 ```
-import { Footer, FooterLinkColumn, Link, NavBar } from "hira-ui";
+import { Footer, FooterLinkColumn, Link, NavBar } from "@nullpalette/hira-ui";
 ```
 
 # Doc
