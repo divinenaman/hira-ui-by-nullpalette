@@ -16,7 +16,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "*",
     "react-dom": "*"
   },
