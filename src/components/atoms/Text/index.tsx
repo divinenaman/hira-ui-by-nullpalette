@@ -18,7 +18,7 @@ interface ITextProps {
   variant?: TTextVariantTypes;
 }
 
-export default function Text({
+export function Text({
   color = "black",
   size = "",
   weight = "normal",

@@ -8,8 +8,8 @@ interface IFooterProps extends IDefaultProps {
   height?: string | number;
   width?: string | number;
   numOfLinkColumns?: number;
-  brandingSection: string | React.ReactNode;
-  copyrightSection: string | React.ReactNode;
+  brandingSection?: string | React.ReactNode;
+  copyrightSection?: string | React.ReactNode;
   children: React.ReactNode;
   showHelperBoundaries?: boolean;
 }
@@ -23,7 +23,7 @@ export function FooterLinkColumn({
   title = "",
   style = {},
   children,
-  className,
+  className = "",
 }: IFooterLinkColumnProps) {
   return (
     <div className={`hira-footer_link_column ${className}`} style={style}>

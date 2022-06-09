@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState, useRef, useEffect } from "react";
 
 interface ILinkProps {
   to: string;
@@ -15,7 +15,7 @@ interface ILinkProps {
   onActiveBackgroundColor?: string;
 }
 
-export default function Link({
+export function Link({
   to,
   targetNewTab = false,
   active = false,
@@ -29,19 +29,30 @@ export default function Link({
   children,
   className = "",
 }: ILinkProps) {
-  const [action, setAction] = useState("default");
+  // const [action, setAction] = useState("default");
+  // const textColorRef = useRef(textColor);
+  // const bgColorRef = useRef(backgroundColor);
 
-  const getTextColor = () => {
-    if (active) return onActiveTextColor;
-    if (action === "hover") return onHoverTextColor;
-    return textColor;
-  };
+  // const setTextColor = () => {
+  //   let c = textColor;
+  //   if (active) c = onActiveTextColor;
+  //   if (action === "hover") c = onHoverTextColor;
 
-  const getBgColor = () => {
-    if (active) return onActiveBackgroundColor;
-    if (action === "hover") return onHoverBackgroundColor;
-    return backgroundColor;
-  };
+  //   textColorRef.current = c;
+  // };
+
+  // const setBgColor = () => {
+  //   let c = backgroundColor;
+  //   if (active) c = onActiveBackgroundColor;
+  //   if (action === "hover") c = onHoverBackgroundColor;
+
+  //   bgColorRef.current = c;
+  // };
+
+  // useEffect(() => {
+  //   setTextColor();
+  //   setBgColor();
+  // }, [action]);
 
   return (
     <a
@@ -49,14 +60,14 @@ export default function Link({
       target={targetNewTab ? "_blank" : "_self"}
       style={{
         textDecoration: "none",
-        color: getTextColor(),
-        backgroundColor: getBgColor(),
+        color: textColor,
+        backgroundColor: backgroundColor,
         fontSize: 12,
         ...style,
       }}
       href={to}
-      onMouseEnter={(e) => setAction("hover")}
-      onMouseLeave={(e) => setAction("default")}
+      // onMouseEnter={(e) => setAction("hover")}
+      // onMouseLeave={(e) => setAction("default")}
     >
       {children}
     </a>
