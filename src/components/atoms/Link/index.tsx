@@ -1,4 +1,4 @@
-// import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 interface ILinkProps {
   to: string;
@@ -29,30 +29,23 @@ export function Link({
   children,
   className = "",
 }: ILinkProps) {
-  // const [action, setAction] = useState("default");
-  // const textColorRef = useRef(textColor);
-  // const bgColorRef = useRef(backgroundColor);
+  const [action, setAction] = useState("default");
 
-  // const setTextColor = () => {
-  //   let c = textColor;
-  //   if (active) c = onActiveTextColor;
-  //   if (action === "hover") c = onHoverTextColor;
+  const getTextColor = () => {
+    let c = textColor;
+    if (active) c = onActiveTextColor;
+    if (action === "hover") c = onHoverTextColor;
 
-  //   textColorRef.current = c;
-  // };
+    return c;
+  };
 
-  // const setBgColor = () => {
-  //   let c = backgroundColor;
-  //   if (active) c = onActiveBackgroundColor;
-  //   if (action === "hover") c = onHoverBackgroundColor;
+  const getBgColor = () => {
+    let c = backgroundColor;
+    if (active) c = onActiveBackgroundColor;
+    if (action === "hover") c = onHoverBackgroundColor;
 
-  //   bgColorRef.current = c;
-  // };
-
-  // useEffect(() => {
-  //   setTextColor();
-  //   setBgColor();
-  // }, [action]);
+    return c;
+  };
 
   return (
     <a
@@ -60,14 +53,14 @@ export function Link({
       target={targetNewTab ? "_blank" : "_self"}
       style={{
         textDecoration: "none",
-        color: textColor,
-        backgroundColor: backgroundColor,
+        color: getTextColor(),
+        backgroundColor: getBgColor(),
         fontSize: 12,
         ...style,
       }}
       href={to}
-      // onMouseEnter={(e) => setAction("hover")}
-      // onMouseLeave={(e) => setAction("default")}
+      onMouseEnter={(e) => setAction("hover")}
+      onMouseLeave={(e) => setAction("default")}
     >
       {children}
     </a>

@@ -19,7 +19,7 @@ interface ITextProps {
 }
 
 export function Text({
-  color = "black",
+  color = "inherit",
   size = "",
   weight = "normal",
   style = {},
