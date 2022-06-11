@@ -10,6 +10,10 @@ export default defineConfig({
       formats: ["es", "cjs"],
       fileName: (format) => `hira-ui.${format}.js`,
     },
+    sourcemap: true,
+    rollupOptions: {
+      external: ["react", "react-dom"],
+    },
   },
   plugins: [
     react(),

@@ -1,25 +1,25 @@
 # hira-ui-by-nullpalette
 Aesthetic, Easy, Efficient
 
-# Setup
+## Setup
 
-- # Installation
+- ### Installation
 
     ```
     npm i @nullpalette/hira-ui
     ```
 
-- # Import Styles
+- ### Import Styles
     Add this import line in the application entry file like index, app to import CSS globally.
 
     ```
-    import "@nullpalette/hira-ui/dist/style.css";
+    import "@nullpalette/hira-ui/styles";
     ```
 
-# Usage   
+## Usage   
 ```
 import { Footer, FooterLinkColumn, Link, NavBar } from "@nullpalette/hira-ui";
 ```
 
-# Doc
-## Storybook: [Click Here](https://courageous-squirrel-73ebc1.netlify.app)
+## Doc
+- ### Storybook: [Click Here](https://courageous-squirrel-73ebc1.netlify.app)
