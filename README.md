@@ -13,7 +13,7 @@ Aesthetic, Easy, Efficient
     Add this import line in the application entry file like index, app to import CSS globally.
 
     ```
-    import "@nullpalette/hira-ui/dist/style.css";
+    import "@nullpalette/hira-ui/styles";
     ```
 
 # Usage   
