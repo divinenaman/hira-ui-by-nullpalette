@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Footer, FooterLinkColumn, Link } from "../components";
+import { Footer, FooterLinkColumn, Link } from "../../components";
 
 export default {
   title: "Example/Footer",

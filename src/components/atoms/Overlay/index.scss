@@ -1,0 +1,51 @@
+.hira-overlay {
+  position: relative;
+
+  &_content {
+    width: 100%;
+    height: 100%;
+  }
+
+  &_component {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 80;
+    transition: all 0.5s ease;
+  }
+
+  &[data-display="hover"] & {
+    &_component {
+      &[data-slide="top"] {
+        clip-path: inset(0 0 100% 0);
+      }
+
+      &[data-slide="left"] {
+        clip-path: inset(0 100% 0 0);
+      }
+
+      &[data-slide="bottom"] {
+        clip-path: inset(100% 0 0 0);
+      }
+
+      &[data-slide="right"] {
+        clip-path: inset(0 0 0 100%);
+      }
+    }
+  }
+
+  &[data-display="hover"]:hover & {
+    &_component {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  &[data-help="true"] {
+    &,
+    & > * {
+      border: solid 2px red;
+    }
+  }
+}
