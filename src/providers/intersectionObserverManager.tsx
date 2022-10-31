@@ -1,74 +1,109 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
-const IntersectionObserverContext = React.createContext();
+interface IObservers {
+  [index: string]: IntersectionObserver;
+}
+type TObserverTargetHandler = (state: IntersectionObserverEntry) => void;
 
-const callback = (next) => {
-  return (entries, obv) => {
-    entries.forEach((entry, i) => {
-      const state = {};
-      if (entry.isIntersecting) {
-        state.isIntersecting = true;
-        state.intersectionRatio = entry.intersectionRatio;
-      } else {
-        state.isIntersecting = false;
-        state.intersectionRatio = entry.intersectionRatio;
-      }
-      next(entry, state);
+interface contextProps {
+  createObserver(id: string, root: HTMLElement): void;
+  setObserverTarget(
+    id: string,
+    reference: HTMLElement,
+    action: TObserverTargetHandler
+  ): void;
+}
+
+const IntersectionObserverContext =
+  React.createContext<contextProps | null>(null);
+
+const callback = (
+  next: (s: IntersectionObserverEntry, o: IntersectionObserver) => void
+) => {
+  return (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ) => {
+    entries.forEach((entry, _) => {
+      next(entry, observer);
     });
   };
 };
 
-const IntersectionManager = ({
+const IntersectionObserverManager = ({
   children,
-  threshold = [0],
-  root = null,
-  rootMargin = "0px 0px 0px 0px",
+}: {
+  children: React.ReactNode;
 }) => {
-  const observers = useRef(new Map());
+  const observerTargets = useRef(
+    new Map<string, WeakMap<Element, TObserverTargetHandler>>()
+  );
+  const observers = useRef<IObservers>({});
 
-  const next = (reference, state) => {
-    const handler = observers.current.get(reference.target);
-    if (handler?.action) {
-      const prevState = handler?.state;
-      const currState = { ...state };
-      if (
-        prevState &&
-        currState.intersectionRatio < prevState?.intersectionRatio
-      ) {
-        currState.increasingRatio = false;
-      } else {
-        currState.increasingRatio = true;
+  const next = (
+    state: IntersectionObserverEntry,
+    observer: IntersectionObserver
+  ) => {
+    let id = "";
+    for (const i in observers) {
+      if (observers.current[i] == observer) {
+        id = i;
       }
-      observers.current.set(reference.target, {
-        ...handler,
-        state: currState,
-      });
-      handler.action(currState);
     }
+
+    const handler = observerTargets.current.get(id)?.get(state.target);
+    if (handler) handler(state);
   };
 
-  const intersectionInstance = useRef(
-    new IntersectionObserver(callback(next), {
-      threshold,
-      root,
-      rootMargin,
-    })
-  );
+  function createObserver(
+    id: string,
+    root: HTMLElement,
+    rootMargin: string = "0",
+    threshold: number[] = [1]
+  ) {
+    if (Object.hasOwn(observers.current, id)) {
+      console.error("observer id should be unique");
+      return;
+    }
 
-  const registerObserver = (reference, action) => {
-    observers.current.set(reference, { action });
-    intersectionInstance.current.observe(reference);
+    observers.current[id] = new IntersectionObserver(callback(next), {
+      root,
+      threshold,
+      rootMargin,
+    });
+  }
+
+  const setObserverTarget = (
+    id: string,
+    reference: HTMLElement,
+    action: TObserverTargetHandler
+  ) => {
+    if (!Object.hasOwn(observers.current, id)) {
+      console.error("observer id not found");
+      return;
+    }
+
+    observers.current[id].observe(reference);
+    let idTargets = observerTargets.current.get(id);
+
+    if (!idTargets) {
+      observerTargets.current.set(id, new WeakMap());
+      idTargets = observerTargets.current.get(id);
+    }
+
+    idTargets?.set(reference, action);
   };
 
   useEffect(() => {
     return () => {
-      intersectionInstance.current.disconnect();
-      observers.current.clear();
+      Object.values(observers.current).forEach((o) => o.disconnect());
     };
   }, []);
 
   return (
-    <IntersectionObserverContext.Provider value={{ registerObserver }}>
+    <IntersectionObserverContext.Provider
+      value={{ createObserver, setObserverTarget }}
+    >
       {children}
     </IntersectionObserverContext.Provider>
   );
@@ -78,4 +113,4 @@ const useIntersection = () => {
   return useContext(IntersectionObserverContext);
 };
 
-export { IntersectionManager, useIntersection };
+export { IntersectionObserverManager, useIntersection };
